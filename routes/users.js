@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User');
 var async = require('async');
+var bcrypt = require('bcrypt-nodejs');
 
 
 // users route start
@@ -45,7 +46,7 @@ router.get('/:id/edit', isLoggedIn, function(req, res){
   });
 }); //edit
 
-router.put('/users/:id', isLoggedIn, checkUserRegValidation, function(req, res){
+router.put('/:id', isLoggedIn, checkUserRegValidation, function(req, res){
   if(req.params.id != req.user._id) return res.json({success:false, message:"Unathorized Attempt"});
   User.findById(req.params.id, req.body.user, function(err,user){
 

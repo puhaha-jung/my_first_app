@@ -1,6 +1,6 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var User = mongoose.model('user', userSchema);
+var User = require('../models/User');
 
 passport.serializeUser(function(user, done){
   done(null, user.id);
